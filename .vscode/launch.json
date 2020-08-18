@@ -1,0 +1,13 @@
+{
+  "configurations": [
+    {
+      "name": "Launch",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Build",
+      "program": "${workspaceFolder}/MemerAPI/bin/Debug/netcoreapp3.1/MemerAPI.dll",
+      "cwd": "${workspaceFolder}/MemerAPI",
+      "console": "internalConsole"
+    }
+  ]
+}

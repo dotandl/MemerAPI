@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using MemerAPI.Models;
 using MemerAPI.Wrappers;
 using Microsoft.AspNetCore.Hosting;
@@ -20,23 +21,23 @@ namespace MemerAPI.Controllers
      * Get a random image from https://komixxy.pl
      */
     [HttpGet]
-    public IActionResult Get()
+    public async Task<IActionResult> Get()
     {
       try
       {
         Success success = new Success
         {
-          Result = KomixxyWrapper.Random()
+          Result = await KomixxyWrapper.Random()
         };
 
         return Ok(success.Get());
       }
-      catch (NotImplementedException ex)
+      catch (Exception ex)
       {
         Error err = new Error
         {
           Code = 1, // temporary
-          Message = "Random image getting has not been implemented for Komixxy yet",
+          Message = "An unexpected error occurred",
           Exception = ex
         };
 

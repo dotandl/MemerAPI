@@ -27,8 +27,8 @@ namespace MemerAPI.Models
     /// <returns>The error object</returns>
     private object GetInfo() => new
     {
-      error = _code,
-      message = _message
+      Error = _code,
+      Message = _message
     };
 
     /// <summary>
@@ -41,8 +41,8 @@ namespace MemerAPI.Models
       message = _message,
       exception = new
       {
-        message = _exception.Message,
-        stack_trace = _exception.StackTrace
+        Message = _exception.Message,
+        StackTrace = _exception.StackTrace
       }
     };
 

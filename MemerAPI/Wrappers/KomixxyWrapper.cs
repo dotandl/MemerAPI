@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using MemerAPI.Exceptions;
+using MemerAPI.Extensions;
 using MemerAPI.Models;
 
 namespace MemerAPI.Wrappers
@@ -22,12 +24,20 @@ namespace MemerAPI.Wrappers
 
     public static async Task<MemeInfo> Random()
     {
+      WebClientPlus wc;
       string html;
 
-      using (WebClient wc = new WebClient())
+      try
+      {
+        wc = new WebClientPlus();
         html = await wc.DownloadStringTaskAsync(_uris[UriType.Random]);
+      }
+      catch (WebException ex)
+      {
+        throw new ServiceOrConnectionException("Could not load the page", ex);
+      }
 
-      IConfiguration config = Configuration.Default.WithDefaultLoader();
+      IConfiguration config = Configuration.Default;
       IBrowsingContext context = BrowsingContext.New(config);
       IDocument document = await context.OpenAsync(req => req.Content(html).Address(_baseUrl));
 
@@ -39,8 +49,12 @@ namespace MemerAPI.Wrappers
       IHtmlHeadingElement h =
         (IHtmlHeadingElement)picDiv.QuerySelector("h1.picture");
 
+      if (img == null || h == null)
+        throw new NotFoundException("Either \"img\" or \"h1\" tag could not be found");
+
       MemeInfo meme = new MemeInfo
       {
+        ViewURI = wc.ResponseURI.ToString(),
         URI = img.Source,
         Alt = img.AlternativeText,
         Name = h.TextContent

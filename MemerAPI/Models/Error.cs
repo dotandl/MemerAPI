@@ -41,6 +41,7 @@ namespace MemerAPI.Models
       message = _message,
       exception = new
       {
+        Type = _exception.GetType().ToString(),
         Message = _exception.Message,
         StackTrace = _exception.StackTrace
       }

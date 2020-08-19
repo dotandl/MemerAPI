@@ -5,6 +5,9 @@ namespace MemerAPI.Models
   /// </summary>
   public class MemeInfo
   {
+    /// <value>URI to the page with the meme</value>
+    public string ViewURI { get; set; }
+
     /// <value>URI of the image</value>
     public string URI { get; set; }
 

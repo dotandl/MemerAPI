@@ -5,31 +5,30 @@ using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using MemerAPI.Exceptions;
-using MemerAPI.Extensions;
 using MemerAPI.Models;
 
 namespace MemerAPI.Wrappers
 {
   /// <summary>
-  /// Wrapper for https://komixxy.pl
+  /// Wrapper for https://memy.jeja.pl
   /// </summary>
-  public class KomixxyWrapper : IWrapper
+  public class JejaWrapper : IWrapper
   {
-    private static readonly string _baseUrl = "https://komixxy.pl";
+    private static readonly string _baseUrl = "https://memy.jeja.pl";
     private static readonly IDictionary<UriType, string> _uris =
       new Dictionary<UriType, string>
       {
-        { UriType.Random, $"{_baseUrl}/losuj" }
+        { UriType.Random, $"{_baseUrl}/losowe" }
       };
 
     public static async Task<MemeInfo> Random()
     {
-      WebClientPlus wc;
+      WebClient wc;
       string html;
 
       try
       {
-        wc = new WebClientPlus();
+        wc = new WebClient();
         html = await wc.DownloadStringTaskAsync(_uris[UriType.Random]);
       }
       catch (WebException ex)
@@ -41,23 +40,20 @@ namespace MemerAPI.Wrappers
       IBrowsingContext context = BrowsingContext.New(config);
       IDocument document = await context.OpenAsync(req => req.Content(html).Address(_baseUrl));
 
-      IElement picDiv = document.DocumentElement.QuerySelector("#main_container .pic");
+      IElement picDiv = document.DocumentElement.QuerySelector("#wrapper-wrap .left");
 
-      IHtmlImageElement img =
-        (IHtmlImageElement)picDiv.QuerySelector(".pic_image img");
+      IHtmlImageElement img = (IHtmlImageElement)picDiv.QuerySelector(".left-wrap img");
+      IHtmlAnchorElement a = (IHtmlAnchorElement)picDiv.QuerySelector("h2 a");
 
-      IHtmlHeadingElement h =
-        (IHtmlHeadingElement)picDiv.QuerySelector("h1.picture");
-
-      if (img == null || h == null)
-        throw new NotFoundException("Either \"img\" or \"h1\" tag could not be found");
+      if (img == null || a == null)
+        throw new NotFoundException("Either \"img\" or \"a\" tag could not be found");
 
       return new MemeInfo
       {
-        ViewURI = wc.ResponseURI.ToString(),
+        ViewURI = a.Href,
         URI = img.Source,
         Alt = img.AlternativeText,
-        Name = h.TextContent
+        Name = a.TextContent
       };
     }
   }

@@ -37,9 +37,9 @@ namespace MemerAPI.Models
     /// <returns>The error object</returns>
     private object GetDevInfo() => new
     {
-      error = _code,
-      message = _message,
-      exception = new
+      Error = _code,
+      Message = _message,
+      Exception = new
       {
         Type = _exception.GetType().ToString(),
         Message = _exception.Message,

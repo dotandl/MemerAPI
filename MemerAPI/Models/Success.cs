@@ -15,6 +15,6 @@ namespace MemerAPI.Models
     /// </summary>
     /// <returns>The success object</returns>
     public object Get() =>
-      TypeMerger.TypeMerger.Merge(new { error = 0 }, _result);
+      TypeMerger.TypeMerger.Merge(new { Error = 0 }, _result);
   }
 }

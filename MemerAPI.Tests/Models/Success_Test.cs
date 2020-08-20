@@ -1,7 +1,7 @@
 using MemerAPI.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MemerAPI.Tests
+namespace MemerAPI.Tests.Models
 {
   [TestClass]
   public class Success_Test

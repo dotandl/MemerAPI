@@ -9,7 +9,8 @@ namespace MemerAPI
   /// </summary>
   public enum UriType
   {
-    Random
+    Random,
+    Page
   }
 
   /// <summary>

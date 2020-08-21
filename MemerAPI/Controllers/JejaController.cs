@@ -12,14 +12,14 @@ namespace MemerAPI.Controllers
   [Route("[controller]")]
   public class JejaController : ControllerBase
   {
-    private bool _isDev;
+    private readonly bool _isDev;
 
     public JejaController(IWebHostEnvironment env) =>
       _isDev = env.EnvironmentName == "Development";
 
     /*
      * GET /jeja
-     * Get a random image from https://memy.jeja.pl
+     * Gets a random image from https://memy.jeja.pl
      */
     [HttpGet]
     public async Task<IActionResult> Get()

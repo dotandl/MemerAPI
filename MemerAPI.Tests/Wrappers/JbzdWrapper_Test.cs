@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MemerAPI.Tests.Wrappers
 {
   [TestClass]
-  public class KwejkWrapper_Test
+  public class JbzdWrapper_Test
   {
     [TestMethod]
     public async Task Random_ResultMemeInfo()
@@ -19,7 +19,7 @@ namespace MemerAPI.Tests.Wrappers
       // video instead of image
       try
       {
-        meme = await KwejkWrapper.Random();
+        meme = await JbzdWrapper.Random();
       }
       catch (NotFoundException)
       {
@@ -27,11 +27,11 @@ namespace MemerAPI.Tests.Wrappers
         return;
       }
 
-      // Due to the Kwejk random image page working, image URI and view URI
-      // are the same
-      Assert.AreEqual(meme.URI, meme.ViewURI);
+      Assert.IsTrue(new Regex(@"^https?:\/\/jbzd.com.pl\/.+$")
+        .IsMatch(meme.ViewURI));
 
-      Assert.IsTrue(new Regex(@"^https?:\/\/.+\.kwejk\.pl\/.+$").IsMatch(meme.URI));
+      Assert.IsTrue(new Regex(@"^https?:\/\/.+\.jbzd.com.pl/.+$")
+        .IsMatch(meme.URI));
     }
   }
 }

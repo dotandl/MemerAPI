@@ -10,16 +10,16 @@ namespace MemerAPI.Controllers
 {
   [ApiController]
   [Route("[controller]")]
-  public class KomixxyController : ControllerBase
+  public class JbzdController : ControllerBase
   {
     private readonly bool _isDev;
 
-    public KomixxyController(IWebHostEnvironment env) =>
+    public JbzdController(IWebHostEnvironment env) =>
       _isDev = env.EnvironmentName == "Development";
 
     /*
-     * GET /komixxy
-     * Gets a random image from https://komixxy.pl
+     * GET /jbzd
+     * Gets a random image from https://jbzd.com.pl
      */
     [HttpGet]
     public async Task<IActionResult> Get()
@@ -28,7 +28,7 @@ namespace MemerAPI.Controllers
       {
         Success success = new Success
         {
-          Result = await KomixxyWrapper.Random()
+          Result = await JbzdWrapper.Random()
         };
 
         return Ok(success.Get());

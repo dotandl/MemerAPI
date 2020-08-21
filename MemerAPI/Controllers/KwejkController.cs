@@ -19,7 +19,7 @@ namespace MemerAPI.Controllers
 
     /*
      * GET /kwejk
-     * Get a random image from https://kwejk.pl
+     * Gets a random image from https://kwejk.pl
      */
     public async Task<IActionResult> Get()
     {

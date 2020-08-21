@@ -3,6 +3,9 @@
 This API allows you to easily get your favorite memes from some most popular
 (at this time mainly Polish; other will be added in next releases) services.
 
+_MemerAPI_ is hosted on _Heroku_:
+[https://memerapi.herokuapp.com/](https://memerapi.herokuapp.com/).
+
 ## Supported services
 
 Currently _MemerAPI_ supports the following services:

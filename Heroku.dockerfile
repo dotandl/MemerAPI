@@ -11,4 +11,6 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /MemerAPI
 COPY --from=build /MemerAPI/out ./
 
-CMD dotnet MemerAPI.dll
+# Heroku needs the server to run on host 0.0.0.0 at the random port saved in
+# PORT environment variable
+CMD dotnet MemerAPI.dll --urls=http://0.0.0.0:${PORT}

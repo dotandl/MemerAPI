@@ -7,6 +7,9 @@
     {
       "label": "Build",
       "args": ["build"]
+    }, {
+      "label": "Test",
+      "args": ["test"]
     }
   ]
 }

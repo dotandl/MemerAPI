@@ -11,4 +11,5 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /MemerAPI
 COPY --from=build /MemerAPI/out ./
 
-CMD dotnet MemerAPI.dll
+EXPOSE 80
+CMD dotnet MemerAPI.dll --urls=http://localhost:80

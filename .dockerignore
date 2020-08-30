@@ -1,13 +1,2 @@
-.git/
-.vscode/
-
 **/bin/
 **/obj/
-
-MemerAPI.Tests/
-
-.editorconfig
-.gitignore
-
-MemerAPI.postman_collection.json
-MemerAPI.sln

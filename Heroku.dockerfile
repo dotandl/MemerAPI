@@ -1,3 +1,6 @@
+# This Dockerfile is used to create a Docker image to deploy to Heroku.
+# Use the file named "Dockerfile" instead.
+
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /MemerAPI
 
@@ -13,4 +16,5 @@ COPY --from=build /MemerAPI/out ./
 
 # Heroku needs the server to run on host 0.0.0.0 at the random port saved in
 # PORT environment variable
+EXPOSE ${PORT}
 CMD dotnet MemerAPI.dll --urls=http://0.0.0.0:${PORT}

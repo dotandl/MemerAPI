@@ -1,5 +1,7 @@
 # MemerAPI - API with memes!
 
+![Build](https://github.com/dotandl/MemerAPI/workflows/Build/badge.svg)
+
 This API allows you to easily get your favorite memes from some most popular
 (at this time mainly Polish; other will be added in next releases) services.
 

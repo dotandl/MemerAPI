@@ -13,16 +13,22 @@ namespace MemerAPI.Wrappers
   /// <summary>
   /// Wrapper for https://komixxy.pl
   /// </summary>
-  public class KomixxyWrapper : IWrapper
+  public class KomixxyWrapper : Wrapper
   {
-    private static readonly string _baseUrl = "https://komixxy.pl";
-    private static readonly IDictionary<UriType, string> _uris =
-      new Dictionary<UriType, string>
+    protected override string _baseUrl { get; }
+    protected override IDictionary<UriType, string> _uris { get; }
+
+    public KomixxyWrapper()
+    {
+      _baseUrl = "https://komixxy.pl";
+
+      _uris = new Dictionary<UriType, string>
       {
         { UriType.Random, $"{_baseUrl}/losuj" }
       };
+    }
 
-    public static async Task<MemeInfo> Random()
+    public override async Task<MemeInfo> RandomAsync()
     {
       WebClientPlus wc;
       string html;

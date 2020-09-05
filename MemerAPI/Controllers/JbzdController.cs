@@ -12,6 +12,8 @@ namespace MemerAPI.Controllers
   [Route("[controller]")]
   public class JbzdController : ControllerBase
   {
+    private JbzdWrapper _wrapper = new JbzdWrapper();
+
     private readonly bool _isDev;
 
     public JbzdController(IWebHostEnvironment env) =>
@@ -28,7 +30,7 @@ namespace MemerAPI.Controllers
       {
         Success success = new Success
         {
-          Result = await JbzdWrapper.Random()
+          Result = await _wrapper.RandomAsync()
         };
 
         return Ok(success.Get());

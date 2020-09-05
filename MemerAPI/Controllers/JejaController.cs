@@ -12,6 +12,8 @@ namespace MemerAPI.Controllers
   [Route("[controller]")]
   public class JejaController : ControllerBase
   {
+    private JejaWrapper _wrapper = new JejaWrapper();
+
     private readonly bool _isDev;
 
     public JejaController(IWebHostEnvironment env) =>
@@ -28,7 +30,7 @@ namespace MemerAPI.Controllers
       {
         Success success = new Success
         {
-          Result = await JejaWrapper.Random()
+          Result = await _wrapper.RandomAsync()
         };
 
         return Ok(success.Get());

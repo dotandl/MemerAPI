@@ -12,16 +12,22 @@ namespace MemerAPI.Wrappers
   /// <summary>
   /// Wrapper for https://kwejk.pl
   /// </summary>
-  public class KwejkWrapper : IWrapper
+  public class KwejkWrapper : Wrapper
   {
-    private static readonly string _baseUrl = "https://kwejk.pl";
-    private static readonly IDictionary<UriType, string> _uris =
-      new Dictionary<UriType, string>
+    protected override string _baseUrl { get; }
+    protected override IDictionary<UriType, string> _uris { get; }
+
+    public KwejkWrapper()
+    {
+      _baseUrl = "https://kwejk.pl";
+
+      _uris = new Dictionary<UriType, string>
       {
         { UriType.Random, $"{_baseUrl}/losowy" }
       };
+    }
 
-    public static async Task<MemeInfo> Random()
+    public override async Task<MemeInfo> RandomAsync()
     {
       WebClient wc;
       string html;

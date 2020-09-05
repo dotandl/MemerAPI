@@ -12,6 +12,8 @@ namespace MemerAPI.Controllers
   [Route("[controller]")]
   public class KomixxyController : ControllerBase
   {
+    private KomixxyWrapper _wrapper = new KomixxyWrapper();
+
     private readonly bool _isDev;
 
     public KomixxyController(IWebHostEnvironment env) =>
@@ -28,7 +30,7 @@ namespace MemerAPI.Controllers
       {
         Success success = new Success
         {
-          Result = await KomixxyWrapper.Random()
+          Result = await _wrapper.RandomAsync()
         };
 
         return Ok(success.Get());

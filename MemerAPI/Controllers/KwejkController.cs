@@ -12,6 +12,8 @@ namespace MemerAPI.Controllers
   [Route("[controller]")]
   public class KwejkController : ControllerBase
   {
+    private KwejkWrapper _wrapper = new KwejkWrapper();
+
     private readonly bool _isDev;
 
     public KwejkController(IWebHostEnvironment env) =>
@@ -27,7 +29,7 @@ namespace MemerAPI.Controllers
       {
         Success success = new Success
         {
-          Result = await KwejkWrapper.Random()
+          Result = await _wrapper.RandomAsync()
         };
 
         return Ok(success.Get());

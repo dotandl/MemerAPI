@@ -10,6 +10,8 @@ namespace MemerAPI.Tests.Wrappers
   [TestClass]
   public class JbzdWrapper_Test
   {
+    private JbzdWrapper _wrapper = new JbzdWrapper();
+
     [TestMethod]
     public async Task Random_ResultMemeInfo()
     {
@@ -19,7 +21,7 @@ namespace MemerAPI.Tests.Wrappers
       // video instead of image
       try
       {
-        meme = await JbzdWrapper.Random();
+        meme = await _wrapper.RandomAsync();
       }
       catch (NotFoundException)
       {

@@ -18,7 +18,7 @@ using MemerAPI.Models;
 
 namespace MemerAPI.Wrappers
 {
-  public class JbzdWrapper : IWrapper
+  public class JbzdWrapper : Wrapper
   {
     /// <summary>
     /// The const that constraints the max subpage the wrapper can get a random
@@ -32,14 +32,20 @@ namespace MemerAPI.Wrappers
       public string Site { get; set; }
     }
 
-    private static readonly string _baseUrl = "https://jbzd.com.pl";
-    private static readonly IDictionary<UriType, string> _uris =
-      new Dictionary<UriType, string>
+    protected override string _baseUrl { get; }
+    protected override IDictionary<UriType, string> _uris { get; }
+
+    public JbzdWrapper()
+    {
+      _baseUrl = "https://jbzd.com.pl";
+
+      _uris = new Dictionary<UriType, string>
       {
         { UriType.Page, _baseUrl + "/str/{0}" }
       };
+    }
 
-    private static PseudoRandomImage GetPseudoRandomImage()
+    private PseudoRandomImage GetPseudoRandomImage()
     {
       Random rand = new Random();
 
@@ -53,7 +59,7 @@ namespace MemerAPI.Wrappers
       };
     }
 
-    public static async Task<MemeInfo> Random()
+    public override async Task<MemeInfo> RandomAsync()
     {
       PseudoRandomImage image = GetPseudoRandomImage();
 

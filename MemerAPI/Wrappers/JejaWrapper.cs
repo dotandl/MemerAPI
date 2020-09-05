@@ -12,16 +12,22 @@ namespace MemerAPI.Wrappers
   /// <summary>
   /// Wrapper for https://memy.jeja.pl
   /// </summary>
-  public class JejaWrapper : IWrapper
+  public class JejaWrapper : Wrapper
   {
-    private static readonly string _baseUrl = "https://memy.jeja.pl";
-    private static readonly IDictionary<UriType, string> _uris =
-      new Dictionary<UriType, string>
+    protected override string _baseUrl { get; }
+    protected override IDictionary<UriType, string> _uris { get; }
+
+    public JejaWrapper()
+    {
+      _baseUrl = "https://memy.jeja.pl";
+
+      _uris = new Dictionary<UriType, string>
       {
         { UriType.Random, $"{_baseUrl}/losowe" }
       };
+    }
 
-    public static async Task<MemeInfo> Random()
+    public override async Task<MemeInfo> RandomAsync()
     {
       WebClient wc;
       string html;

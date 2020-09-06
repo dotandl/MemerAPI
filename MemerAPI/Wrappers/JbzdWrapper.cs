@@ -80,19 +80,19 @@ namespace MemerAPI.Wrappers
       IBrowsingContext context = BrowsingContext.New(config);
       IDocument document = await context.OpenAsync(req => req.Content(html).Address(_baseUrl));
 
-      IHtmlCollection<IElement> picDiv = document.DocumentElement.QuerySelectorAll(
-        "#content-container article .article-content");
+      IElement picDiv = document.DocumentElement.QuerySelectorAll(
+        "#content-container article .article-content")[image.NthChild];
 
-      IHtmlImageElement img = (IHtmlImageElement)picDiv[image.NthChild]
+      IHtmlImageElement img = (IHtmlImageElement)picDiv
         .QuerySelector(".article-image img");
-      IHtmlAnchorElement a = (IHtmlAnchorElement)picDiv[image.NthChild]
+      IHtmlAnchorElement a = (IHtmlAnchorElement)picDiv
         .QuerySelector(".article-title a");
-      IHtmlSourceElement src = (IHtmlSourceElement)picDiv[image.NthChild]
+      IHtmlSourceElement src = (IHtmlSourceElement)picDiv
         .QuerySelector(".article-image video > source");
 
       if ((img == null && src == null) || a == null)
         throw new NotFoundException(
-          "Either \"img\", \"src\" or \"a\" tag could not be found");
+          "Either \"img\", \"source\" or \"a\" tag could not be found");
 
       MemeInfo meme;
 

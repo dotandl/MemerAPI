@@ -24,7 +24,7 @@ namespace MemerAPI.Models
     /// <value>Name of the image (most often just the image's heading)</value>
     public string Name { get; set; }
 
-    /// <value>Type of the element (image, git, video)</value>
+    /// <value>Type of the element (image, gif, video)</value>
     public MediaType Type { get; set; }
 
     /// <summary>
@@ -41,5 +41,3 @@ namespace MemerAPI.Models
     };
   }
 }
-
-// TODO: remove all Get() methods from models

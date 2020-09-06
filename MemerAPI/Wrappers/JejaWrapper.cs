@@ -53,25 +53,38 @@ namespace MemerAPI.Wrappers
         .QuerySelectorAll("#wrapper-wrap .left .ob-left-box-images")[RandomNthChild()];
 
       IHtmlImageElement img = (IHtmlImageElement)picDiv
-        .QuerySelector(".left-wrap img");
+        .QuerySelector(".left-wrap a img:last-child");
       IHtmlAnchorElement a = (IHtmlAnchorElement)picDiv
         .QuerySelector("h2 a");
       IHtmlInputElement input = (IHtmlInputElement)picDiv
         .QuerySelector(".left-wrap input[type=\"hidden\"]");
+      IHtmlSourceElement src = (IHtmlSourceElement)picDiv
+        .QuerySelector(".left-wrap video > source");
 
-      if (img == null || a == null)
+      if ((src == null && img == null) || a == null)
         throw new NotFoundException(
-          "Either \"img\" or \"a\" tag could not be found");
+          "Either \"img\", \"source\" or \"a\" tag could not be found");
 
       MemeInfo meme;
 
-      if (input != null)
+      if (src != null)
+      {
+        meme = new MemeInfo
+        {
+          ViewURI = a.Href,
+          URI = src.Source,
+          Alt = string.Empty,
+          Name = a.TextContent,
+          Type = MediaType.Video
+        };
+      }
+      else if (input != null)
       {
         meme = new MemeInfo
         {
           ViewURI = a.Href,
           URI = input.Value,
-          Alt = string.Empty,
+          Alt = img.AlternativeText,
           Name = a.TextContent,
           Type = MediaType.Gif
         };
@@ -92,3 +105,5 @@ namespace MemerAPI.Wrappers
     }
   }
 }
+
+// TODO: update tests

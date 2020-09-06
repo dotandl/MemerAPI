@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace MemerAPI.Wrappers
       };
     }
 
+    private int RandomNthChild() => new Random().Next(0, 8);
+
     public override async Task<MemeInfo> RandomAsync()
     {
       WebClient wc;
@@ -46,21 +49,46 @@ namespace MemerAPI.Wrappers
       IBrowsingContext context = BrowsingContext.New(config);
       IDocument document = await context.OpenAsync(req => req.Content(html).Address(_baseUrl));
 
-      IElement picDiv = document.DocumentElement.QuerySelector("#wrapper-wrap .left");
+      IElement picDiv = document.DocumentElement
+        .QuerySelectorAll("#wrapper-wrap .left .ob-left-box-images")[RandomNthChild()];
 
-      IHtmlImageElement img = (IHtmlImageElement)picDiv.QuerySelector(".left-wrap img");
-      IHtmlAnchorElement a = (IHtmlAnchorElement)picDiv.QuerySelector("h2 a");
+      IHtmlImageElement img = (IHtmlImageElement)picDiv
+        .QuerySelector(".left-wrap img");
+      IHtmlAnchorElement a = (IHtmlAnchorElement)picDiv
+        .QuerySelector("h2 a");
+      IHtmlInputElement input = (IHtmlInputElement)picDiv
+        .QuerySelector(".left-wrap input[type=\"hidden\"]");
 
       if (img == null || a == null)
-        throw new NotFoundException("Either \"img\" or \"a\" tag could not be found");
+        throw new NotFoundException(
+          "Either \"img\" or \"a\" tag could not be found");
 
-      return new MemeInfo
+      MemeInfo meme;
+
+      if (input != null)
       {
-        ViewURI = a.Href,
-        URI = img.Source,
-        Alt = img.AlternativeText,
-        Name = a.TextContent
-      };
+        meme = new MemeInfo
+        {
+          ViewURI = a.Href,
+          URI = input.Value,
+          Alt = string.Empty,
+          Name = a.TextContent,
+          Type = MediaType.Gif
+        };
+      }
+      else
+      {
+        meme = new MemeInfo
+        {
+          ViewURI = a.Href,
+          URI = img.Source,
+          Alt = img.AlternativeText,
+          Name = a.TextContent,
+          Type = MediaType.Image
+        };
+      }
+
+      return meme;
     }
   }
 }

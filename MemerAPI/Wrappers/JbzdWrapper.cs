@@ -87,17 +87,39 @@ namespace MemerAPI.Wrappers
         .QuerySelector(".article-image img");
       IHtmlAnchorElement a = (IHtmlAnchorElement)picDiv[image.NthChild]
         .QuerySelector(".article-title a");
+      IHtmlSourceElement src = (IHtmlSourceElement)picDiv[image.NthChild]
+        .QuerySelector(".article-image video > source");
 
-      if (img == null || a == null)
-        throw new NotFoundException("Either \"img\" or \"a\" tag could not be found");
+      if ((img == null && src == null) || a == null)
+        throw new NotFoundException(
+          "Either \"img\", \"src\" or \"a\" tag could not be found");
 
-      return new MemeInfo
+      MemeInfo meme;
+
+      if (src != null)
       {
-        ViewURI = a.Href,
-        URI = img.Source,
-        Alt = img.AlternativeText,
-        Name = a.TextContent.Trim()
-      };
+        meme = new MemeInfo
+        {
+          ViewURI = a.Href,
+          URI = src.Source,
+          Alt = string.Empty,
+          Name = a.TextContent.Trim(),
+          Type = MediaType.Video
+        };
+      }
+      else
+      {
+        meme = new MemeInfo
+        {
+          ViewURI = a.Href,
+          URI = img.Source,
+          Alt = img.AlternativeText,
+          Name = a.TextContent.Trim(),
+          Type = MediaType.Image
+        };
+      }
+
+      return meme;
     }
   }
 }

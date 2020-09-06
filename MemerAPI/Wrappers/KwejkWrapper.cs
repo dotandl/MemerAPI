@@ -50,19 +50,40 @@ namespace MemerAPI.Wrappers
 
       IHtmlImageElement img = (IHtmlImageElement)picDiv.QuerySelector(".figure-holder figure img");
       IHtmlHeadingElement h = (IHtmlHeadingElement)picDiv.QuerySelector(".content h1");
+      IElement player = picDiv.QuerySelector(".figure-holder figure player");
 
-      if (img == null || h == null)
-        throw new NotFoundException("Either \"img\" or \"h\" tag could not be found");
+      if ((player == null && img == null) || h == null)
+        throw new NotFoundException(
+          "Either \"img\", \"player\" or \"h\" tag could not be found");
 
-      return new MemeInfo
+      // Unfortunately on Kwejk random image page there's no link to the
+      // original image page, so ViewURI = URI
+      MemeInfo meme;
+
+      if (player != null)
       {
-        // Unfortunately on Kwejk random image page there's no link to the
-        // original image page, so ViewURI = URI
-        ViewURI = img.Source,
-        URI = img.Source,
-        Alt = img.AlternativeText,
-        Name = h.TextContent.Trim()
-      };
+        meme = new MemeInfo
+        {
+          ViewURI = player.GetAttribute("source"),
+          URI = player.GetAttribute("source"),
+          Alt = string.Empty,
+          Name = h.TextContent.Trim(),
+          Type = MediaType.Video
+        };
+      }
+      else
+      {
+        meme = new MemeInfo
+        {
+          ViewURI = img.Source,
+          URI = img.Source,
+          Alt = img.AlternativeText,
+          Name = h.TextContent.Trim(),
+          Type = MediaType.Image
+        };
+      }
+
+      return meme;
     }
   }
 }

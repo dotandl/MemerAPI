@@ -27,9 +27,11 @@ namespace MemerAPI.Controllers
     {
       try
       {
+        MemeInfo meme = await _wrapper.RandomAsync();
+
         Success success = new Success
         {
-          Result = await _wrapper.RandomAsync()
+          Result = meme.Get()
         };
 
         return Ok(success.Get());

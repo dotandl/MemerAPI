@@ -1,5 +1,12 @@
 namespace MemerAPI.Models
 {
+  public enum MediaType
+  {
+    Image,
+    Gif,
+    Video
+  }
+
   /// <summary>
   /// Model containing info about a meme
   /// </summary>
@@ -16,5 +23,23 @@ namespace MemerAPI.Models
 
     /// <value>Name of the image (most often just the image's heading)</value>
     public string Name { get; set; }
+
+    /// <value>Type of the element (image, git, video)</value>
+    public MediaType Type { get; set; }
+
+    /// <summary>
+    /// Method preparing a meme object
+    /// </summary>
+    /// <returns>A meme object</returns>
+    public object Get() => new
+    {
+      ViewURI,
+      URI,
+      Alt,
+      Name,
+      Type = Type.ToString().ToLower()
+    };
   }
 }
+
+// TODO: remove all Get() methods from models

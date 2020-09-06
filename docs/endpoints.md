@@ -25,9 +25,16 @@ where `{service}` is one of the following values:
   "uri": "https://komixxy.pl//uimages/201409/1411581842_by_curtiss_500.jpg",
   "viewURI": "https://komixxy.pl/1432914",
   "alt": "Szanse –  ",
-  "name": "Szanse"
+  "name": "Szanse",
+  "type": "image"
 }
 ```
+
+where `"type"` is one of the following values:
+
+- `image` - Normal image (e.g. JPEG, PNG)
+- `gif` - Animated image (GIF)
+- `video` - Video (e.g. MP4)
 
 ### Response (error)
 
@@ -38,7 +45,7 @@ where `{service}` is one of the following values:
 }
 ```
 
-where `"error"` is one of the following integers:
+where `"error"` is one of the following values:
 
 - `0` - No error (success; with HTTP code = 200)
 - `1` - An image could not be found (with HTTP code = 404)

@@ -12,4 +12,4 @@ WORKDIR /MemerAPI
 COPY --from=build /MemerAPI/out ./
 
 EXPOSE 80
-CMD dotnet MemerAPI.dll --urls=http://localhost:80
+CMD dotnet MemerAPI.dll --urls=http://0.0.0.0:80

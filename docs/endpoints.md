@@ -12,10 +12,10 @@ GET /{service}
 
 where `{service}` is one of the following values:
 
-- `komixxy`
-- `jeja`
-- `kwejk`
-- `jbzd`
+- `komixxy` (Images)
+- `jeja` (Images, GIFs, Videos)
+- `kwejk` (Images, Videos)
+- `jbzd` (Images, Videos)
 
 ### Response (success)
 

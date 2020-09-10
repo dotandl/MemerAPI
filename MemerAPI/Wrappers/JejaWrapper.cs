@@ -105,5 +105,3 @@ namespace MemerAPI.Wrappers
     }
   }
 }
-
-// TODO: update tests

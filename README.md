@@ -25,7 +25,7 @@ ones by opening new GitHub Issue or add ones by opening new GitHub Pull Request.
 This API is written in ASP.NET Core 3.1 (C#). To run a development version type:
 
 ```sh
-# Development profile - listening on https://localhost:5001
+# Development profile - listening on http://localhost:5000
 $ dotnet run -p MemerAPI
 ```
 
@@ -33,7 +33,7 @@ To build and run the release version type:
 
 ```sh
 # Release profile - listening on http://localhost:80
-$ dotnet publish  MemerAPI -o out -c Release
+$ dotnet publish MemerAPI -o out -c Release
 $ dotnet out/MemerAPI.dll
 ```
 

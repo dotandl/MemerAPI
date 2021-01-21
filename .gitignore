@@ -6,3 +6,5 @@ TestResults/
 !.vscode/launch.json
 !.vscode/tasks.json
 !.vscode/extensions.json
+
+Heroku.dockerfile

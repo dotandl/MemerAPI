@@ -34,6 +34,9 @@ namespace MemerAPI
     /// Method getting the random image from the service
     /// </summary>
     /// <returns>Info about the meme</returns>
-    public abstract Task<MemeInfo> RandomAsync();
+    public virtual Task<MemeInfo> RandomAsync()
+    {
+      throw new NotImplementedException();
+    }
   }
 }

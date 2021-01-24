@@ -27,8 +27,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Komixxy",
@@ -39,7 +38,6 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "42fc0a86-743c-4680-9a62-6585cb9ada4a",
 								"exec": [
 									""
 								],
@@ -63,8 +61,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Kwejk",
@@ -87,14 +84,13 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Jbzd",
 			"item": [
 				{
-					"name": "Jbzd",
+					"name": "Jbzd Random",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -111,15 +107,58 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
+		},
+		{
+			"name": "DemotMaker",
+			"item": [
+				{
+					"name": "DemotMaker Generate Demotivator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"description": "The image placed in the center of the Demotivator",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/demotmaker?title=&description=",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"demotmaker"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "",
+									"description": "The title of the Demotivator"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"description": "The description of the Demotivator"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "70333f15-20e6-4d7f-a4a0-e47199658b5e",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -129,7 +168,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "3f88f968-9953-4be2-9f11-035340c70367",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -139,10 +177,8 @@
 	],
 	"variable": [
 		{
-			"id": "44b51148-deec-45a3-bf64-1f1c81e1413b",
 			"key": "URL",
-			"value": "https://localhost:5001"
+			"value": "http://localhost:5000"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

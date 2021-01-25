@@ -52,3 +52,25 @@ where `"error"` is one of the following values:
 - `2` - An error occureed while connecting to the external service (with HTTP
   code = 502)
 - `3` - An unexpected error occurred (with HTTP code = 500)
+
+## Generate Demotivator
+
+Generates a demotivator using http://demotmaker.com.pl/ (`POST` because of
+sending binary data)
+
+```
+POST /demotmaker?title={title}&description={description}
+```
+
+Where `{title}` is the main text on the demotivator and the `{description}` is
+the text right under the `{title}`.
+
+#### Including image
+
+You also need to include an image which will be placed in the centre of the
+demotivator. To do so, set the `Content-Type` header to `multipart/form-data`
+and send the image as property named `image`.
+
+### Response (success & error)
+
+Same as for [Random image](#random-image).

@@ -56,6 +56,8 @@ See [endpoints.md](docs/endpoints.md)
 - Because of the _Jbzd_'s constraints (you must be logged in to get a random
   image), the algorithm gets the random image by itself - thus it can get one
   of the 400 images in all the service.
+- When you use _DemotMaker_'s demotivator generator, `uri` will be equal to
+  `viewURI` and `name` will be equal to `alt`.
 - If you run the API with `Development` configuration (using `dotnet run`; see
   [Build](#Build)), you will be able to see extended error info.
 
